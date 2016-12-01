@@ -1,0 +1,31 @@
+How to use Mysql && MSaccess && MSSQL
+first this first is to download my API and add to your reference
+c#
+using Reverse.Data.Mysql;
+
+MySqlDatabase db = new MySqlDatabase();
+db.Connection = "";//your connection
+//insert update delete on your tables
+db.ExecuteNonQuery("insert into table1(field1,field2) values(@0,@1)", "Values1", "Values2");
+ db.ExecuteNonQuery("update table1 set field1=@0,field2=@1", "Values1", "Values2");
+ // if you see the @ sign there that is a parameter and the values1,values1 are the values or data to be update and to be inserted like textbox1.text etc
+ 
+ //getting all data in your database to your datagridview
+ datagridview1.datasource= db.ExecuteQuery("select * from table1")//execute query has two overrides one has a parametervalues and the other one doesnt have
+ datagridview1.datasource=db.ExecuteQuery("select * from table1 where field1=@0","values1")//
+ 
+ //getting one value only using scalar
+ //executescalar has also two overrides
+ int count=(int)db.ExecuteScalar("select count(t.field1) from table1 as t");
+ int count=(int)db.ExecuteScalar("select count(t.field1) from table1 as t where t.field2=@0","Values1");
+ VB.net
+ Dim db As New MySqlDatabase
+ db.Connection=""//your connection here
+ db.ExecuteNonQuery("insert into table1(field1,field2) values(@0,@1)", "Values1", "Values2");
+ db.ExecuteNonQuery("update table1 set field1=@0,field2=@1", "Values1", "Values2");
+ //
+ datagridview1.datasource= db.ExecuteQuery("select * from table1")//execute query has two overrides one has a parametervalues and the other one doesnt have
+ datagridview1.datasource=db.ExecuteQuery("select * from table1 where field1=@0","values1")//
+ 
+ dim count as int=db.ExecuteScalar("select count(t.field1) from table1 as t");
+ dim count as int=db.ExecuteScalar("select count(t.field1) from table1 as t where t.field2=@0","Values1");
